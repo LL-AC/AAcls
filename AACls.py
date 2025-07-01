@@ -206,9 +206,9 @@ class Block(nn.Module):
 
 
 
-class ABDMIL(nn.Module):
+class AACls(nn.Module):
     def __init__(self, config, n_classes):
-        super(ABDMIL, self).__init__()
+        super(AACls, self).__init__()
 
         self.config = config
 
@@ -267,7 +267,7 @@ class ABDMIL(nn.Module):
         if n == 1:
             threshold = 0
         else:
-            threshold = relevance.mean()
+            threshold = self.a*relevance.mean()
 
         selected_indices = relevance >= threshold
         
@@ -384,7 +384,7 @@ config = {
 
 
 if __name__ == '__main__':
-    model = ABDMIL(config, 6)
+    model = AACls(config, 6)
 
     x = torch.randn((100,3,224,224))
     labels = torch.tensor([1,0,1,1,2,3,0])
