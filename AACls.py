@@ -216,9 +216,9 @@ class AACls(nn.Module):
         self.feature_extractor.fc = nn.Sequential(nn.Linear(512, 768), nn.ReLU())
 
         #freeze in training
-        tokenizer = AutoTokenizer.from_pretrained("/data/lhw/python/digestiveSystem/classification/models/checkpoint/pubmedbert")
+        tokenizer = AutoTokenizer.from_pretrained("pubmedbert")
         self.text_token = tokenizer(config['text_prompt'], padding=True, truncation=True, return_tensors='pt')
-        self.text_encoder = AutoModel.from_pretrained("/data/lhw/python/digestiveSystem/classification/models/checkpoint/pubmedbert")
+        self.text_encoder = AutoModel.from_pretrained("pubmedbert")
         with torch.no_grad():
             output = self.text_encoder(**self.text_token)
             x = output[0]
