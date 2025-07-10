@@ -259,7 +259,7 @@ class AACls(nn.Module):
         text_relevance = feats @ pro.t()    #shape [n c]
 
         #print(targets)
-        relevance = F.softmax(text_relevance/0.07, dim=-1)
+        relevance = F.softmax(text_relevance/0.01, dim=-1)
 
         relevance, _ = relevance.max(dim=-1)
         
@@ -298,7 +298,7 @@ class AACls(nn.Module):
 
         anomalies_matrix = anomalies_matrix.clone().detach()  # 创建一个副本，避免修改原始矩阵
 
-        anomalies_matrix = F.softmax(anomalies_matrix/0.07, dim=-1)       
+        anomalies_matrix = F.softmax(anomalies_matrix/0.01, dim=-1)       
 
         # 设置不需要保留的行和列
         if mask is not None:
